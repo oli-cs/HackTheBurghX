@@ -1,6 +1,6 @@
 from random import choice
 from database import *
-class houseTinder():
+class HouseTinder():
     def __init__(self):
         self.rightHouseIds = set()
 
