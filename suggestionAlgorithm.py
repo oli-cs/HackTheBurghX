@@ -19,14 +19,17 @@ class HouseTinder():
         return
     
     def populate_unseen_houses_set(self) -> None:
-        ids = set(get_ids())#change this line when relevant method is done
+        connect_db()
+        ids = set(get_ids())
+        close_db()
         self.unseenIds = ids - self.get_seen_house_ids()
         return
     
     def get_house_to_display(self) -> dict:
         displayId = choice(self.unseenIds)#make this an actual algorithm at some point
-
+        connect_db()
         row = get_info(displayId)#change this line when relevant method is done
+        close_db()
         return row
 
     def get_next_house(self):
