@@ -80,7 +80,7 @@ def createGUI(data):
     def leftKey():
         page.destroy()
 
-    def rightkey():
+    def rightKey():
         page.destroy()
         
     # detects arrow key presses
