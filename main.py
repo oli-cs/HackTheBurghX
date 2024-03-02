@@ -18,13 +18,13 @@ def main():
     window.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
 
     # image is resized into 500px by 500px aspect ratio
-    oldImg = Image.open("assets/house1.jpg")
-    img = ImageTk.PhotoImage(oldImg.resize((700,500)))
+    oldImg1 = Image.open("assets/house1.jpg")
+    img1 = ImageTk.PhotoImage(oldImg1.resize((700,500)))
     
     # image is set to take the top left 4 grid boxes of the grid
     imageFrame.grid(column=0, columnspan=4, row=0, rowspan=6, sticky='nw', padx=10, pady=10)
-    label = tk.Label(imageFrame, image = img)
-    label.pack(fill=tk.BOTH, expand=True)
+    label1 = tk.Label(imageFrame, image = img1)
+    label1.pack(fill=tk.BOTH, expand=True)
 
     # price
     price = "£500,000"
@@ -37,16 +37,44 @@ def main():
     text2.grid(column=4, columnspan=4, row=1, sticky='n')
 
     # description
-    description = "testaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    description = "test"
     text3 = tk.Label(window, text=description, bg="bisque", wraplength=(94*7))
-    text3.grid(column=4, columnspan=4, row=2, rowspan=3, sticky='n')
+    text3.grid(column=4, columnspan=4, row=2, rowspan=6, sticky='n')
 
     # agency
     agency = "Decent Landlord Lettings"
-    text2 = tk.Label(window, text=agency, bg="bisque", font=Font(size=15), padx=10)
-    text2.grid(column=0, columnspan=4, row=6, sticky='n')
+    text4 = tk.Label(window, text=agency, bg="bisque", font=Font(size=20), padx=10)
+    text4.grid(column=0, columnspan=4, row=6, sticky='n')
 
+    # padding
+    padding = tk.Label(window, text=" ", bg="bisque", font=Font(size=80))
+    padding.grid(column=0, row=7)
     
+    # bedroom icon
+    oldImg2 = Image.open("icons/bedroom.png")
+    img2 = ImageTk.PhotoImage(oldImg2.resize((100,100)))
+    bedroom = tk.Frame(master=window)
+    bedroom.grid(column=0, row=8, sticky='s')
+    label2 = tk.Label(bedroom, image=img2, bg="bisque")
+    label2.pack(fill=tk.BOTH, expand=True)
+
+    # bedroom number
+    bedroomNum = "6"
+    text5 = tk.Label(window, text=bedroomNum, bg="bisque", font=Font(weight="bold", size=42))
+    text5.grid(column=1, row=8)
+
+    # bathroom icon
+    oldImg3 = Image.open("icons/bathroom.png")
+    img3 = ImageTk.PhotoImage(oldImg3.resize((100,100)))
+    bathroom = tk.Frame(master=window)
+    bathroom.grid(column=2, row=8, sticky='s')
+    label3 = tk.Label(bathroom, image=img3, bg="bisque")
+    label3.pack(fill=tk.BOTH, expand=True)
+
+    # bathroom number
+    bathroomNum = "3"
+    text6 = tk.Label(window, text=bathroomNum, bg="bisque", font=Font(weight="bold", size=42))
+    text6.grid(column=3, row=8)
     
     page.mainloop()
     
