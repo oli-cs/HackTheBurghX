@@ -1,4 +1,5 @@
 from random import choice
+from database import *
 class houseTinder():
     def __init__(self):
         self.rightHouseIds = set()
@@ -18,14 +19,14 @@ class houseTinder():
         return
     
     def populateUnseenHousesSet(self) -> None:
-        ids = set(SQLITE.getIdList())#change this line when relevant method is done
+        ids = set(getIds())#change this line when relevant method is done
         self.unseenIds = ids - self.getSeenHouseIds()
         return
     
     def getHouseToDisplay(self) -> dict:
         displayId = choice(self.unseenIds)#make this an actual algorithm at some point
 
-        row = getRowBasedOnId(displayId)#change this line when relevant method is done
+        row = getInfoForId(displayId)#change this line when relevant method is done
         if type(row) == dict:
             return row
         raise TypeError("type of `row` is {rowType} not dict".format(type(row)))
