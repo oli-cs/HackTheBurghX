@@ -7,34 +7,34 @@ class houseTinder():
         self.leftHouseIds = set()
         self.unseenIds = set()
 
-    def getSeenHouseIds(self) -> set:
+    def get_seen_house_ids(self) -> set:
         return self.rightHouseIds.union(self.leftHouseIds)
     
-    def appendRight(self,id:int) -> None:
+    def append_right(self,id:int) -> None:
         self.rightHouseIds.add(id)
         return
 
-    def appendLeft(self,id:int) -> None:
+    def append_left(self,id:int) -> None:
         self.leftHouseIds.add(id)
         return
     
-    def populateUnseenHousesSet(self) -> None:
-        ids = set(getIds())#change this line when relevant method is done
-        self.unseenIds = ids - self.getSeenHouseIds()
+    def populate_unseen_houses_set(self) -> None:
+        ids = set(get_ids())#change this line when relevant method is done
+        self.unseenIds = ids - self.get_seen_house_ids()
         return
     
-    def getHouseToDisplay(self) -> dict:
+    def get_house_to_display(self) -> dict:
         displayId = choice(self.unseenIds)#make this an actual algorithm at some point
 
-        row = getInfoForId(displayId)#change this line when relevant method is done
+        row = get_info(displayId)#change this line when relevant method is done
         if type(row) == dict:
             return row
         raise TypeError("type of `row` is {rowType} not dict".format(type(row)))
 
-    def getNexthouse(self):
-        self.populateUnseenHousesSet()
+    def get_next_house(self):
+        self.populate_unseen_houses_set()
         try:
-            return self.getHouseToDisplay()
+            return self.get_house_to_display()
         except TypeError as e:
             print(str(e))
         return
