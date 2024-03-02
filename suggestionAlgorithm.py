@@ -1,7 +1,10 @@
-class houseTinderAlgo():
+from random import choice
+class houseTinder():
     def __init__(self):
         self.rightHouseIds = set()
+
         self.leftHouseIds = set()
+        self.unseenIds = set()
 
     def getSeenHouseIds(self) -> set:
         return self.rightHouseIds.union(self.leftHouseIds)
@@ -14,8 +17,42 @@ class houseTinderAlgo():
         self.leftHouseIds.add(id)
         return
     
-    def getNextHouse(self) -> dict:
-        pass
+    def populateUnseenHousesSet(self) -> None:
+        ids = set(SQLITE.getIdList())#change this line when relevant method is done
+        self.unseenIds = ids - self.getSeenHouseIds()
+        return
+    
+    def getHouseToDisplay(self) -> dict:
+        displayId = choice(self.unseenIds)#make this an actual algorithm at some point
+
+        row = getRowBasedOnId(displayId)#change this line when relevant method is done
+        if type(row) == dict:
+            return row
+        raise TypeError("type of `row` is {rowType} not dict".format(type(row)))
+
+    def getNexthouse(self):
+        self.populateUnseenHousesSet()
+        try:
+            return self.getHouseToDisplay()
+        except TypeError as e:
+            print(str(e))
+        return
+    
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+    
 
     
 
