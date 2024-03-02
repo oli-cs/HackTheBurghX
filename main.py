@@ -2,10 +2,9 @@ import tkinter as tk
 from tkinter.font import Font
 from PIL import ImageTk, Image
 
-def main():
+def createGUI(data):
     page = tk.Tk()
 
-    
     # window with border are created as frames
     border = tk.Frame(master=page, width=210, height=110, bg="saddle brown")
     window = tk.Frame(master=border, width=200, height=100, bg="bisque")
@@ -18,7 +17,7 @@ def main():
     window.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
 
     # image is resized into 500px by 500px aspect ratio
-    oldImg1 = Image.open("assets/house1.jpg")
+    oldImg1 = Image.open(data[6])
     img1 = ImageTk.PhotoImage(oldImg1.resize((700,500)))
     
     # image is set to take the top left 4 grid boxes of the grid
@@ -27,22 +26,22 @@ def main():
     label1.pack(fill=tk.BOTH, expand=True)
 
     # price
-    price = "£500,000"
+    price = "£" + str(data[4])
     text = tk.Label(window, text=price, bg="bisque", font=Font(weight="bold", size=50))
     text.grid(column=4, columnspan=4, row=0, sticky='n')
 
-    #address
-    address = "Barnehurst Road, Eltham, SE9"
+    # address
+    address = data[5]
     text2 = tk.Label(window, text=address, bg="bisque", font=Font(size=35))
     text2.grid(column=4, columnspan=4, row=1, sticky='n')
 
     # description
-    description = "test"
+    description = data[7]
     text3 = tk.Label(window, text=description, bg="bisque", wraplength=(94*7))
     text3.grid(column=4, columnspan=4, row=2, rowspan=6, sticky='n')
 
     # agency
-    agency = "Decent Landlord Lettings"
+    agency = data[1]
     text4 = tk.Label(window, text=agency, bg="bisque", font=Font(size=20), padx=10)
     text4.grid(column=0, columnspan=4, row=6, sticky='n')
 
@@ -59,7 +58,7 @@ def main():
     label2.pack(fill=tk.BOTH, expand=True)
 
     # bedroom number
-    bedroomNum = "6"
+    bedroomNum = str(data[2])
     text5 = tk.Label(window, text=bedroomNum, bg="bisque", font=Font(weight="bold", size=42))
     text5.grid(column=1, row=8)
 
@@ -72,10 +71,8 @@ def main():
     label3.pack(fill=tk.BOTH, expand=True)
 
     # bathroom number
-    bathroomNum = "3"
+    bathroomNum = str(data[3])
     text6 = tk.Label(window, text=bathroomNum, bg="bisque", font=Font(weight="bold", size=42))
     text6.grid(column=3, row=8)
     
     page.mainloop()
-    
-main()
