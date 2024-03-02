@@ -26,19 +26,15 @@ class HouseTinder():
         return
     
     def get_house_to_display(self) -> dict:
-        displayId = choice(self.unseenIds)#make this an actual algorithm at some point
+        displayId = choice(list(self.unseenIds))#make this an actual algorithm at some point
         connect_db()
         row = get_info(displayId)#change this line when relevant method is done
         close_db()
         return row
 
-    def get_next_house(self):
+    def get_next_house(self) -> list:
         self.populate_unseen_houses_set()
-        try:
-            return self.get_house_to_display()
-        except TypeError as e:
-            print(str(e))
-        return
+        return self.get_house_to_display()
     
 
 
