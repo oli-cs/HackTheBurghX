@@ -77,10 +77,10 @@ def createGUI(data):
     text6.grid(column=3, row=8)
 
     # on left or right arrow key press, destroy page
-    def leftKey():
+    def leftKey(event):
         page.destroy()
 
-    def rightKey():
+    def rightKey(event):
         page.destroy()
         
     # detects arrow key presses
