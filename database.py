@@ -34,12 +34,28 @@ def insert_into_db(id:int, agency:str, beds:int, baths:int, price:int, address:s
 
 #display all data
 def display_db_data():
-    print("Data Inserted in the table: ") 
     global cursor
     data=cursor.execute('''SELECT * FROM HOUSES''')
     for row in data: 
         print(row) 
 
+#get all the ids of houses
+def get_ids():
+    global cursor
+    id = []
+    data=cursor.execute('''SELECT ID FROM HOUSES''')
+    for row in data:
+        id.append(row[0])
+    return id
+
+#get a row corresponding to a specified house ID
+def get_info(id:int):
+    global cursor
+    data=cursor.execute('''SELECT * FROM HOUSES WHERE ID = (?)''', [id])
+    for row in data:
+        return row
+
+#delete the entire database
 def delete_db():
     os.remove('''database.db''')
 
