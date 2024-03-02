@@ -78,9 +78,11 @@ def createGUI(data):
     
     # on left or right arrow key press, destroy page
     def leftKey(event):
+        HouseTinder.append_left(data[0])
         page.destroy()
 
     def rightKey(event):
+        HouseTinder.append_right(data[0])
         page.destroy()
         
     # detects arrow key presses
