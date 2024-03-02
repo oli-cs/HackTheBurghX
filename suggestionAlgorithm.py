@@ -27,9 +27,7 @@ class houseTinder():
         displayId = choice(self.unseenIds)#make this an actual algorithm at some point
 
         row = get_info(displayId)#change this line when relevant method is done
-        if type(row) == dict:
-            return row
-        raise TypeError("type of `row` is {rowType} not dict".format(type(row)))
+        return row
 
     def get_next_house(self):
         self.populate_unseen_houses_set()
