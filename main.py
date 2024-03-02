@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter.font import Font
 from PIL import ImageTk, Image
+from suggestionAlgorithm import HouseTinder
 
 def createGUI(data):
     page = tk.Tk()
@@ -76,3 +77,11 @@ def createGUI(data):
     text6.grid(column=3, row=8)
     
     page.mainloop()
+
+
+def main():
+    backend = HouseTinder()
+    while True:
+        createGUI(backend.get_next_house())
+
+main()
