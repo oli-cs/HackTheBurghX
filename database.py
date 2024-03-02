@@ -63,3 +63,17 @@ def delete_db():
 def close_db():
     global conn
     conn.close()
+
+
+"""connect_db()
+create_db()
+insert_into_db(6,"agency",9,2,189,"radford", "image....", "cool description woah")
+display_db_data()
+delete_db()
+close_db()"""
+
+connect_db()
+#insert_into_db(14,"agency",9,2,189,"radford", "image....", "cool description woah")
+get_ids()
+get_info(8)
+close_db()
