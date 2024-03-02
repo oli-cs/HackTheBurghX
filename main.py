@@ -92,7 +92,6 @@ def createGUI(data):
 
 def main():
     backend = HouseTinder()
-    while True:
-        createGUI(backend.get_next_house())
+    createGUI(backend.get_next_house())
 
 main()
