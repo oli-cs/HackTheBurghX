@@ -74,5 +74,16 @@ def createGUI(data):
     bathroomNum = str(data[3])
     text6 = tk.Label(window, text=bathroomNum, bg="bisque", font=Font(weight="bold", size=42))
     text6.grid(column=3, row=8)
+
+    # on left or right arrow key press, destroy page
+    def leftKey():
+        page.destroy()
+
+    def rightkey():
+        page.destroy()
+        
+    # detects arrow key presses
+    page.bind('<Left>', leftKey)
+    page.bind('<Right>', rightKey)
     
     page.mainloop()
