@@ -77,10 +77,10 @@ def createGUI(data,backend):
     text6.grid(column=3, row=8)
 
     #left arrow
-    oldImg4 = Image.open("icons/left_arrow.png")
-    img4 = ImageTk.PhotoImage(oldImg4.resize((100,100)))
-    leftArrow = tk.Label(window, image=img4, bg="bisque")
-    leftArrow.place(anchor=W)
+    #oldImg4 = Image.open("icons/left_arrow.png")
+    #img4 = ImageTk.PhotoImage(oldImg4.resize((100,100)))
+    #leftArrow = tk.Label(window, image=img4)
+    #leftArrow.place(anchor='w')
     
     # on left or right arrow key press, destroy page
     def leftKey(event):
