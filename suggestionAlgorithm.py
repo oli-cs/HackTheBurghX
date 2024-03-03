@@ -15,7 +15,7 @@ class HouseTinder():
         self.priceMean = 0
         self.numBedsMean = 0
         self.numBathsMean = 0
-        self.recommendationReason = "Randomised"
+        self.recommendationReason = "randomised"
 
     def get_seen_house_ids(self) -> set:
         return self.rightHouseIds.union(self.leftHouseIds)
