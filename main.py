@@ -181,7 +181,7 @@ def titlePage():
     window.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
 
     # title text
-    text = tk.Label(window, text="House Tinder", font=Font(weight="bold", size=80), bg='thistle1')
+    text = tk.Label(window, text="House Link", font=Font(weight="bold", size=80), bg='thistle1')
     text.pack(pady=30)
 
     def buttonPress():
