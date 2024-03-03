@@ -91,9 +91,14 @@ def createGUI(data,backend):
     
     page.mainloop()
 
+    return()
+
 
 def main():
     backend = HouseTinder()
-    createGUI(backend.get_next_house(),backend)
+    while True:
+        createGUI(backend.get_next_house(),backend)
+        if len(backend.unseenIds) == 0:
+            return
 
 main()
