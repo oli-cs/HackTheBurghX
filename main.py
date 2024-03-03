@@ -5,6 +5,7 @@ from suggestionAlgorithm import HouseTinder
 
 def createGUI(data,backend):
     page = tk.Tk()
+    page.attributes("-fullscreen", True)
 
     # window with border are created as frames
     border = tk.Frame(master=page, width=210, height=110, bg="saddle brown")
@@ -75,6 +76,12 @@ def createGUI(data,backend):
     bathroomNum = str(data[3])
     text6 = tk.Label(window, text=bathroomNum, bg="bisque", font=Font(weight="bold", size=42))
     text6.grid(column=3, row=8)
+
+    #left arrow
+    #oldImg4 = Image.open("icons/left_arrow.png")
+    #img4 = ImageTk.PhotoImage(oldImg4.resize((100,100)))
+    #leftArrow = tk.Label(window, image=img4)
+    #leftArrow.place(anchor='w')
     
     # on left or right arrow key press, destroy page
     def leftKey(event):
@@ -96,9 +103,12 @@ def createGUI(data,backend):
 
 def main():
     backend = HouseTinder()
+    createGUI(backend.get_next_house(),backend)
     while True:
-        createGUI(backend.get_next_house(),backend)
-        if len(backend.unseenIds) == 0:
+        nextHouse = backend.get_next_house()
+        if nextHouse != []:
+            createGUI(nextHouse,backend)
+        else:
             return
 
 main()
