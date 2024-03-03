@@ -165,18 +165,58 @@ def end():
     
     page.mainloop()
 
+def titlePage():
+    page = tk.Tk()
+    page.attributes("-fullscreen", True)
+
+    # window with border are created as frames
+    border = tk.Frame(master=page, width=210, height=110, bg="DeepPink4")
+    window = tk.Frame(master=border, width=200, height=100, bg="thistle1")
+
+    # the frame that holds the image is created
+    imageFrame = tk.Frame(master=window)
+
+    # border and windows are packed to fit the page
+    border.pack(fill=tk.BOTH, expand=True, padx=30, pady=30)
+    window.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
+
+    # title text
+    text = tk.Label(window, text="House Tinder", font=Font(weight="bold", size=80), bg='thistle1')
+    text.pack(pady=30)
+
+    def buttonPress():
+        page.destroy()
+    
+    # button
+    button = tk.Button(window, text="Click here to start browsing!", font=Font(size=30), activebackground="bisque", command=buttonPress)
+    button.pack(pady=200)
+
+    # logo
+    oldImg = Image.open("icons/logo.png")
+    img = ImageTk.PhotoImage(oldImg.resize((100,100)))
+    logo = tk.Label(window, image=img, bg="thistle1")
+    logo.pack(side='bottom', pady=50)
+
+    # escape key
+    def escape(event):
+        global escapePressed
+        escapePressed = 1
+        page.destroy()
+
+    page.bind('<Escape>', escape)
+    
+    page.mainloop()
+
 def main():
     global escapePressed
+    titlePage()
     backend = HouseTinder()
     createGUI(backend.get_next_house(),backend)
-    while True:
+    while escapePressed == 0:
         nextHouse = backend.get_next_house()
-        if nextHouse != [] and escapePressed == 0:
+        if nextHouse != []:
             createGUI(nextHouse,backend)
-        elif escapePressed == 0:
-            end()
-            return
         else:
-            return
+            end()
             
 main()
