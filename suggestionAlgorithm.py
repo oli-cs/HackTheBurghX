@@ -15,6 +15,7 @@ class HouseTinder():
         self.priceMean = 0
         self.numBedsMean = 0
         self.numBathsMean = 0
+        self.recommendationReason = "Randomised"
 
     def get_seen_house_ids(self) -> set:
         return self.rightHouseIds.union(self.leftHouseIds)
@@ -65,21 +66,25 @@ class HouseTinder():
         if self.priceStdDev < self.numBedsStdDev and self.priceStdDev < self.numBathsStdDev:
             #price is most important - show entry closest to mean
             print("recommended based on price")
+            self.recommendationReason = "recommended based on price"
             return self.get_id_of_closest_item_to_mean(idArray,4,self.priceMean)
 
         elif self.numBathsStdDev < self.numBedsStdDev and self.numBathsStdDev < self.priceStdDev:
             #baths is most important
             print("recommended based on number of baths")
+            self.recommendationReason = "recommended based on number of baths"
             return self.get_id_of_closest_item_to_mean(idArray,3,self.numBathsMean)
         
         elif self.numBedsStdDev < self.numBathsStdDev and self.numBedsStdDev < self.priceStdDev:
             #beds is most important
             print("recommended based on number of beds")
+            self.recommendationReason = "recommended based on number of beds"
             return self.get_id_of_closest_item_to_mean(idArray,2,self.numBedsMean)
         
         elif self.priceStdDev < self.numBedsStdDev and self.priceStdDev == self.numBathsStdDev:
             #price and baths are equally important
             print("recommended based on price or number of baths")
+            self.recommendationReason = "recommended based on price or number of baths"
             priceCandidate = self.get_id_of_closest_item_to_mean(idArray,4,self.priceMean)
             bathCandidate = self.get_id_of_closest_item_to_mean(idArray,3,self.numBathsMean)
             return choice([priceCandidate,bathCandidate])
@@ -87,6 +92,7 @@ class HouseTinder():
         elif self.priceStdDev < self.numBathsStdDev and self.priceStdDev == self.numBedsStdDev:
             #price and beds are equally important
             print("recommended based on price or number of beds")
+            self.recommendationReason = "recommended based on price or number of beds"
             priceCandidate = self.get_id_of_closest_item_to_mean(idArray,4,self.priceMean)
             bedCandidate = self.get_id_of_closest_item_to_mean(idArray,2,self.numBedsMean)
             return choice([priceCandidate,bedCandidate])
@@ -94,6 +100,7 @@ class HouseTinder():
         elif self.numBedsStdDev < self.priceStdDev and self.numBedsStdDev == self.numBathsStdDev:
             #beds and baths are equally important
             print("recommended based on number of beds or number of baths")
+            self.recommendationReason = "recommended based on number of beds or number of baths"
             bathCandidate = self.get_id_of_closest_item_to_mean(idArray,3,self.numBathsMean)
             bedCandidate = self.get_id_of_closest_item_to_mean(idArray,2,self.numBedsMean)
             return choice([bathCandidate,bedCandidate])
@@ -101,10 +108,12 @@ class HouseTinder():
         else:
             #all are equally important
             print("randomised")
+            self.recommendationReason = "randomised"
             return choice(idArray)
         
             
-        
+    def getRecommendationReason(self) -> str:
+        return self.recommendationReason
 
     def get_house_to_display(self) -> list:
         displayId = self.choose_house(list(self.unseenIds))
