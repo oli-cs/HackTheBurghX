@@ -102,9 +102,7 @@ def createGUI(data,backend):
 
 def main():
     backend = HouseTinder()
-    while True:
+    while len(backend.unseenIds) > 0:
         createGUI(backend.get_next_house(),backend)
-        if len(backend.unseenIds) == 0:
-            return
 
 main()
