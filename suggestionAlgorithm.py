@@ -18,13 +18,16 @@ class HouseTinder():
     
     def append_right(self,id:int) -> None:
         self.rightHouseIds.add(id)
+        connect_db()
         data = get_info(id)
+        close_db()
         self.rightPrices.append(data[4])
         self.rightNumBeds.append(data[2])
         self.rightNumBaths.append(data[3])
-        self.priceStdDev = stdev(self.rightPrices)
-        self.numBedsStdDev = stdev(self.numBedsStdDev)
-        self.numBathsStdDev = stdev(self.numBathsStdDev)
+        if len(self.rightHouseIds) > 1:
+            self.priceStdDev = stdev(self.rightPrices)
+            self.numBedsStdDev = stdev(self.rightNumBeds)
+            self.numBathsStdDev = stdev(self.rightNumBaths)
         return
 
     def append_left(self,id:int) -> None:

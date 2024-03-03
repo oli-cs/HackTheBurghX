@@ -105,5 +105,6 @@ def main():
     createGUI(backend.get_next_house(),backend)
     while len(backend.unseenIds) > 0:
         createGUI(backend.get_next_house(),backend)
+    return
 
 main()
