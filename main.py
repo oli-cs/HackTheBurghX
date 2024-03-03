@@ -3,7 +3,7 @@ from tkinter.font import Font
 from PIL import ImageTk, Image
 from suggestionAlgorithm import HouseTinder
 
-def createGUI(data):
+def createGUI(data,backend):
     page = tk.Tk()
 
     # window with border are created as frames
@@ -78,11 +78,11 @@ def createGUI(data):
     
     # on left or right arrow key press, destroy page
     def leftKey(event):
-        HouseTinder.append_left(data[0])
+        backend.append_left(data[0])
         page.destroy()
 
     def rightKey(event):
-        HouseTinder.append_right(data[0])
+        backend.append_right(data[0])
         page.destroy()
         
     # detects arrow key presses
@@ -96,6 +96,6 @@ def createGUI(data):
 
 def main():
     backend = HouseTinder()
-    createGUI(backend.get_next_house())
+    createGUI(backend.get_next_house(),backend)
 
 main()
