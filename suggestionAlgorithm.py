@@ -112,7 +112,7 @@ class HouseTinder():
             return choice(idArray)
         
             
-    def getRecommendationReason(self) -> str:
+    def get_recommendation_reason(self) -> str:
         return self.recommendationReason
 
     def get_house_to_display(self) -> list:
