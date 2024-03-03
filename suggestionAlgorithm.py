@@ -1,17 +1,30 @@
 from random import choice
 from database import *
+from statistics import stdev
 class HouseTinder():
     def __init__(self):
         self.rightHouseIds = set()
-
         self.leftHouseIds = set()
         self.unseenIds = set()
+        self.rightPrices = []
+        self.rightNumBeds = []
+        self.rightNumBaths = []
+        self.priceStdDev = 0
+        self.numBedsStdDev = 0
+        self.numBathsStdDev = 0
 
     def get_seen_house_ids(self) -> set:
         return self.rightHouseIds.union(self.leftHouseIds)
     
     def append_right(self,id:int) -> None:
         self.rightHouseIds.add(id)
+        data = get_info(id)
+        self.rightPrices.append(data[4])
+        self.rightNumBeds.append(data[2])
+        self.rightNumBaths.append(data[3])
+        self.priceStdDev = stdev(self.rightPrices)
+        self.numBedsStdDev = stdev(self.numBedsStdDev)
+        self.numBathsStdDev = stdev(self.numBathsStdDev)
         return
 
     def append_left(self,id:int) -> None:
@@ -22,11 +35,14 @@ class HouseTinder():
         connect_db()
         ids = set(get_ids())
         close_db()
-        self.unseenIds = ids - self.get_seen_house_ids()
+        self.unseenIds = ids - self.get_seen_house_ids()#unseen ids = all ids set minus seen ids
         return
     
+    def choose_house(self,idArray:list) -> int:
+        return choice(idArray)
+
     def get_house_to_display(self) -> dict:
-        displayId = choice(list(self.unseenIds))#make this an actual algorithm at some point
+        displayId = self.choose_house(list(self.unseenIds))#make this an actual algorithm at some point
         connect_db()
         row = get_info(displayId)#change this line when relevant method is done
         close_db()
