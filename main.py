@@ -91,8 +91,6 @@ def createGUI(data,backend):
     
     page.mainloop()
 
-    return()
-
 
 def main():
     backend = HouseTinder()
