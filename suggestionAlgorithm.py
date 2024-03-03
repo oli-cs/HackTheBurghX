@@ -41,7 +41,7 @@ class HouseTinder():
     def choose_house(self,idArray:list) -> int:
         return choice(idArray)
 
-    def get_house_to_display(self) -> dict:
+    def get_house_to_display(self) -> list:
         displayId = self.choose_house(list(self.unseenIds))#make this an actual algorithm at some point
         connect_db()
         row = get_info(displayId)#change this line when relevant method is done
