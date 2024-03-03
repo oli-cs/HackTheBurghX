@@ -5,6 +5,7 @@ from suggestionAlgorithm import HouseTinder
 
 def createGUI(data,backend):
     page = tk.Tk()
+    page.attributes("-fullscreen", True)
 
     # window with border are created as frames
     border = tk.Frame(master=page, width=210, height=110, bg="saddle brown")
