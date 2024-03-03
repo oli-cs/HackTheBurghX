@@ -3,6 +3,9 @@ from tkinter.font import Font
 from PIL import ImageTk, Image
 from suggestionAlgorithm import HouseTinder
 
+global escapePressed
+escapePressed = 0
+
 def createGUI(data,backend):
     page = tk.Tk()
     page.attributes("-fullscreen", True)
@@ -55,27 +58,27 @@ def createGUI(data,backend):
     oldImg2 = Image.open("icons/bedroom.png")
     img2 = ImageTk.PhotoImage(oldImg2.resize((100,100)))
     bedroom = tk.Frame(master=window)
-    bedroom.grid(column=0, row=8, sticky='s')
+    bedroom.grid(column=0, row=7, sticky='s')
     label2 = tk.Label(bedroom, image=img2, bg="thistle1")
     label2.pack(fill=tk.BOTH, expand=True)
 
     # bedroom number
     bedroomNum = str(data[2])
     text5 = tk.Label(window, text=bedroomNum, bg="thistle1", font=Font(weight="bold", size=42))
-    text5.grid(column=1, row=8)
+    text5.grid(column=1, row=7)
 
     # bathroom icon
     oldImg3 = Image.open("icons/bathroom.png")
     img3 = ImageTk.PhotoImage(oldImg3.resize((100,100)))
     bathroom = tk.Frame(master=window)
-    bathroom.grid(column=2, row=8, sticky='s')
+    bathroom.grid(column=2, row=7, sticky='s')
     label3 = tk.Label(bathroom, image=img3, bg="thistle1")
     label3.pack(fill=tk.BOTH, expand=True)
 
     # bathroom number
     bathroomNum = str(data[3])
     text6 = tk.Label(window, text=bathroomNum, bg="thistle1", font=Font(weight="bold", size=42))
-    text6.grid(column=3, row=8)
+    text6.grid(column=3, row=7)
 
     # left arrow
     oldImg4 = Image.open("icons/left_arrow.png")
@@ -100,7 +103,7 @@ def createGUI(data,backend):
     # reason text
     if (backend.get_recommendation_reason() != "randomised"):
         reason = tk.Label(window, text=backend.get_recommendation_reason(), bg='bisque')
-        reason.grid(row=8, column=7, sticky='se')
+        reason.grid(column=5, columnspan=2, row=7, sticky='s')
         
     # on left or right arrow key press, destroy page
     def leftKey(event):
@@ -110,10 +113,17 @@ def createGUI(data,backend):
     def rightKey(event):
         backend.append_right(data[0])
         page.destroy()
+
+    # escape key
+    def escape(event):
+        global escapePressed
+        escapePressed = 1
+        page.destroy()
         
     # detects arrow key presses
     page.bind('<Left>', leftKey)
     page.bind('<Right>', rightKey)
+    page.bind('<Escape>', escape)
     
     page.mainloop()
 
@@ -144,18 +154,29 @@ def end():
     img = ImageTk.PhotoImage(oldImg.resize((100,100)))
     logo = tk.Label(window, image=img, bg="thistle1")
     logo.pack(side='bottom', pady=50)
+
+    # escape key
+    def escape(event):
+        global escapePressed
+        escapePressed = 1
+        page.destroy()
+
+    page.bind('<Escape>', escape)
     
     page.mainloop()
 
 def main():
+    global escapePressed
     backend = HouseTinder()
     createGUI(backend.get_next_house(),backend)
     while True:
         nextHouse = backend.get_next_house()
-        if nextHouse != []:
+        if nextHouse != [] and escapePressed == 0:
             createGUI(nextHouse,backend)
-        else:
+        elif escapePressed == 0:
             end()
             return
-
+        else:
+            return
+            
 main()
