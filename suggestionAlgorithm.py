@@ -41,11 +41,36 @@ class HouseTinder():
         self.unseenIds = ids - self.get_seen_house_ids()#unseen ids = all ids set minus seen ids
         return
     
-    def choose_house(self,idArray:list) -> int:
-        return choice(idArray)
+    def choose_house(self,idArray:list) -> int:#make this an actual algorithm at some point
+        if len(self.rightHouseIds) < 1:
+            return choice(idArray)
+        if self.priceStdDev > self.numBedsStdDev and self.priceStdDev > self.numBathsStdDev:
+            #price is most important
+            pass
+        elif self.numBathsStdDev > self.numBedsStdDev and self.numBathsStdDev > self.priceStdDev:
+            #baths is most important
+            pass
+        elif self.numBedsStdDev > self.numBathsStdDev and self.numBedsStdDev > self.priceStdDev:
+            #beds is most important
+            pass
+        elif self.priceStdDev > self.numBedsStdDev and self.priceStdDev == self.numBathsStdDev:
+            #price and baths are equally important
+            pass
+        elif self.priceStdDev > self.numBathsStdDev and self.priceStdDev == self.numBedsStdDev:
+            #price and beds are equally important
+            pass
+        elif self.numBedsStdDev > self.priceStdDev and self.numBedsStdDev == self.numBathsStdDev:
+            #beds and baths are equally important
+            pass
+        else:
+            #all are equally important
+            pass
+        
+            
+        
 
     def get_house_to_display(self) -> list:
-        displayId = self.choose_house(list(self.unseenIds))#make this an actual algorithm at some point
+        displayId = self.choose_house(list(self.unseenIds))
         connect_db()
         row = get_info(displayId)#change this line when relevant method is done
         close_db()
