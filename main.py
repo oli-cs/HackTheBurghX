@@ -105,7 +105,7 @@ def main():
     createGUI(backend.get_next_house(),backend)
     while True:
         nextHouse = backend.get_next_house()
-        if nextHouse != None:
+        if nextHouse != []:
             createGUI(nextHouse,backend)
         else:
             return
