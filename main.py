@@ -108,6 +108,27 @@ def createGUI(data,backend):
     return()
 
 
+def end():
+    page = tk.Tk()
+    page.attributes("-fullscreen", True)
+
+    # window with border are created as frames
+    border = tk.Frame(master=page, width=210, height=110, bg="DeepPink4")
+    window = tk.Frame(master=border, width=200, height=100, bg="thistle1")
+
+    # the frame that holds the image is created
+    imageFrame = tk.Frame(master=window)
+
+    # border and windows are packed to fit the page
+    border.pack(fill=tk.BOTH, expand=True, padx=30, pady=30)
+    window.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
+
+    # check back later text
+    text = tk.Label(window, text="You have viewed \n all properties in your \n area! Check back later \n for new additions.", font=Font(size=40), bg="thistle1", padx=50, pady=50)
+    text.pack()
+    
+    page.mainloop()
+
 def main():
     backend = HouseTinder()
     createGUI(backend.get_next_house(),backend)
@@ -116,6 +137,7 @@ def main():
         if nextHouse != []:
             createGUI(nextHouse,backend)
         else:
+            end()
             return
 
 main()
