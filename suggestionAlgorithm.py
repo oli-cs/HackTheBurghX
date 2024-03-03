@@ -29,10 +29,10 @@ class HouseTinder():
         self.rightNumBeds.append(data[2])
         self.rightNumBaths.append(data[3])
         if len(self.rightHouseIds) > 1:
-            self.priceStdDev = stdev(self.rightPrices)
+            self.priceStdDev = stdev(self.rightPrices)/1793154
             self.numBedsStdDev = stdev(self.rightNumBeds)
             self.numBathsStdDev = stdev(self.rightNumBaths)
-            self.priceMean = mean(self.rightPrices)
+            self.priceMean = mean(self.rightPrices)/416583
             self.numBedsMean = mean(self.rightNumBeds)
             self.numBathsMean = mean(self.rightNumBaths)
         return
@@ -60,7 +60,7 @@ class HouseTinder():
         close_db()
         return idArray[closestToMeanIndex]#throwing a value error here means you need to adjust your closest price to mean initial value
 
-    def choose_house(self,idArray:list) -> int:#make this an actual algorithm at some point
+    def choose_house(self,idArray:list) -> int:
         if len(self.rightHouseIds) < 1:
             return choice(idArray)
         if self.priceStdDev < self.numBedsStdDev and self.priceStdDev < self.numBathsStdDev:
