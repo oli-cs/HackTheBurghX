@@ -77,19 +77,31 @@ def createGUI(data,backend):
     text6 = tk.Label(window, text=bathroomNum, bg="thistle1", font=Font(weight="bold", size=42))
     text6.grid(column=3, row=8)
 
-    #left arrow
+    # left arrow
     oldImg4 = Image.open("icons/left_arrow.png")
     img4 = ImageTk.PhotoImage(oldImg4.resize((100,100)))
     leftArrow = tk.Label(window, image=img4, bg="thistle1")
-    leftArrow.grid(column=5, row=7)
+    leftArrow.grid(column=5, row=6)
 
-    #right arrow
+    # dislike
+    text5 = tk.Label(window, text="dislike", bg="thistle1")
+    text5.grid(column=5, row=7, sticky='n')
+
+    # right arrow
     oldImg5 = Image.open("icons/right_arrow.png")
     img5 = ImageTk.PhotoImage(oldImg5.resize((100,100)))
     rightArrow = tk.Label(window, image=img5, bg="thistle1")
-    rightArrow.grid(column=6, row=7)
-            
-    
+    rightArrow.grid(column=6, row=6)
+
+    # like
+    text5 = tk.Label(window, text="like", bg="thistle1")
+    text5.grid(column=6, row=7, sticky='n')
+
+    # reason text
+    if (backend.get_recommendation_reason() != "randomised"):
+        reason = tk.Label(window, text=backend.get_recommendation_reason(), bg='bisque')
+        reason.grid(row=8, column=7, sticky='se')
+        
     # on left or right arrow key press, destroy page
     def leftKey(event):
         backend.append_left(data[0])
@@ -124,8 +136,14 @@ def end():
     window.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
 
     # check back later text
-    text = tk.Label(window, text="You have viewed \n all properties in your \n area! Check back later \n for new additions.", font=Font(size=40), bg="thistle1", padx=50, pady=50)
-    text.pack()
+    text = tk.Label(window, text="You have viewed \n all properties in your \n area! Check back later \n for new additions.", font=Font(size=40), bg="thistle1")
+    text.pack(pady=50)
+
+    # logo
+    oldImg = Image.open("icons/logo.png")
+    img = ImageTk.PhotoImage(oldImg.resize((100,100)))
+    logo = tk.Label(window, image=img, bg="thistle1")
+    logo.pack(side='bottom', pady=50)
     
     page.mainloop()
 
