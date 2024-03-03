@@ -53,6 +53,8 @@ class HouseTinder():
 
     def get_next_house(self) -> list:
         self.populate_unseen_houses_set()
+        if len(self.unseenIds) == 0:
+            return []
         return self.get_house_to_display()
     
 
